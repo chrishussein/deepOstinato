@@ -1,6 +1,6 @@
 # Data analysis
 - Document here the project: deepOstinato
-- Description: Project Description
+- Description: deepOstinato learns from over 10 000 piano pieces to teach itself how to compose
 - Data Source:
 - Type of analysis:
 
