@@ -29,3 +29,8 @@ six>=1.14
 joblib
 memoized-property
 termcolor
+
+# audio
+librosa
+midi2audio
+soundfile
