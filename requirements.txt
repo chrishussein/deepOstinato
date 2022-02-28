@@ -30,5 +30,8 @@ joblib
 memoized-property
 termcolor
 
-#sound
+# audio
 librosa
+midi2audio
+soundfile
+
