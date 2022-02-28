@@ -32,3 +32,5 @@ termcolor
 
 # audio
 librosa
+midi2audio
+soundfile
