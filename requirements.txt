@@ -3,6 +3,8 @@ pip>=9
 setuptools>=26
 twine
 wheel>=0.29
+# audio
+librosa
 
 # data science
 numpy
