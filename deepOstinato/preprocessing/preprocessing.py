@@ -14,14 +14,17 @@ class Preprocessor(BaseEstimator, TransformerMixin):
         pass
 
     def preprocess(self, path, max_size=55_000_000, min_size=20_000_000):
-
         audio = filter_audio(path, max_size=max_size, min_size=min_size)
 
-        def set_pipeline(self, audio):
-            """defines the pipeline with STFT, Normalization and Padding"""
-            preprocessing_pipeline = Pipeline([
-                ("STFT", STFT(audio, n_fft = FRAME_SIZE-1, hop_length = HOP_SIZE)),
-                ("normalize", MinMaxNormaliser()),
-                ("padding", Padder())
-            ])
-            return preprocessing_pipeline
+    def set_pipeline(self, audio):
+        """defines the pipeline with STFT, Normalization and Padding"""
+        preprocessing_pipeline = Pipeline([
+            ("STFT", STFT(audio, n_fft = FRAME_SIZE-1, hop_length = HOP_SIZE)),
+            ("normalize", MinMaxNormaliser()),
+            ("padding", Padder())
+        ])
+        return preprocessing_pipeline
+
+if __name__ == "__main__":
+    path = " "
+    audio = filter_audio(path, max_size=55_000_000, min_size=20_000_000)
