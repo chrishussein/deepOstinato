@@ -10,4 +10,4 @@ def plot_spectrogram(Y, sr, hop_length=HOP_SIZE, y_axis='log'):
                        hop_length = hop_length,
                        x_axis='time',
                        y_axis=y_axis)
-    plt.colorbar(format="%+2.f")
+    plt.colorbar(format="%+2.f")           #check with coolwarm
