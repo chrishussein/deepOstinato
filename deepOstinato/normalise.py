@@ -10,7 +10,7 @@ class MinMaxNormaliser(BaseEstimator, TransformerMixin):
 
     def normalise(self, array):
         normalised_audio = (array - array.min()) / (array.max() - array.min())
-        normalised_audio = normalised_audio * (self.max  - self.min) + self.min
+        normalised_audio = normalised_audio * (self.max  - self.min) - self.min
         return normalised_audio
 
     def denormalise(self, normalised_audio, original_min, original_max):
