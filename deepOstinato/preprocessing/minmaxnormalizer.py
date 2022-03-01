@@ -1,5 +1,8 @@
 from sklearn.base import BaseEstimator, TransformerMixin
+<<<<<<< HEAD
 import numpy as np
+=======
+>>>>>>> f2eecca45e1189b87b0b8964ca1c00f6d44b03ea
 from deepOstinato.preprocessing.constants import MAX_VAL, MIN_VAL
 
 class MinMaxNormaliser(BaseEstimator, TransformerMixin):
