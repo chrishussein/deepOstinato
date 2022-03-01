@@ -7,3 +7,6 @@ HOP_SIZE = 512
 #Min Max Values for Normalisation
 MIN_VAL = -65.5473
 MAX_VAL = 14.452698
+
+#Padding
+PAD_SIZE = 6000000
