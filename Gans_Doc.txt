@@ -1,0 +1,54 @@
+The loss is what defines how well our model operates.
+"Discriminator loss
+This method quantifies how well the discriminator is able to distinguish real images from fakes.
+It compares the discriminator's predictions on real images to an array of 1s,
+and the discriminator's predictions on fake (generated) images to an array of 0s."
+https://www.tensorflow.org/tutorials/generative/dcgan
+
+"def discriminator_loss(real_output, fake_output):
+    real_loss = cross_entropy(tf.ones_like(real_output), real_output)
+    fake_loss = cross_entropy(tf.zeros_like(fake_output), fake_output)
+    total_loss = real_loss + fake_loss
+    return total_loss"
+
+    ones_like ---> "Creates a tensor of all ones that has the same shape as the input."
+    https://www.tensorflow.org/api_docs/python/tf/ones_like
+
+
+
+1st we should define a generator model that generates images from a random seed and a discriminator model that classifies
+we define the loss to measure how good the generator to come up with new images and the discriminator to asses the images of the generator
+then we can define the optimizers to minimize the loss (we should use Adam optimizer)
+
+def generator():
+    model = Sequential()
+    model.add(layers.Dense(x*y*z, input_shape=[])),
+    model(layers.Reshape([x1,y1,z1])),
+    model(layres.conv2dtranspose('XX', kernel_size = 'X', strides ='X', padding = 'XXXX',activation = 'relu')),
+    model.add(layers.Dense('X', activation = 'softmax' or 'sigmoid'))
+
+def discriminator():
+    model = Sequential()
+    model(layres.conv2dtranspose('XX', kernel_size = 'X', strides ='X', padding = 'XXXX',activation = 'relu')),
+    model.add(layers.Dense('X', activation = 'softmax' or 'sigmoid'))
+
+gan = model(generator, discriminator)
+
+discriminator.compile(loss='binary_crossentropy', optimizer = 'Adam')
+discriminator.trainable = False
+gan.compile(loss = 'binary_crossentropy', optimizer = 'Adam')
+
+def train_gan(gan, dataset, batch_size, codings_size, n_epochs = 'XX):
+    generator, discriminator = gan.layers
+    for epoch in range(n_epochs):
+        for X_batch in dataset:
+            noise = tf.random.normal(shape =[batch_size, codings_size])
+            generated_images = generator(noise)
+            X_fake_and_real = tf.concat([generated_images, X_batch], axis = 0)
+            y1= tf.constant([[0.]]* batch batch_size + [[1.]] * batch_size)
+            discriminator.trainable = True
+            discriminator.train_on_batch(X_fake_and_real, y1)
+            noise = tf.random.normal(shape = [batch_size,codings_size])
+            y2 = tf.constant([[1.]] * batch_size)
+            discriminator.trainable = False
+            gan.train_on_batch(noise.y2)
