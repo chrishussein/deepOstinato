@@ -3,6 +3,7 @@ from sklearn.base import BaseEstimator, TransformerMixin
 class MinMaxNormaliser(BaseEstimator, TransformerMixin):
     """Applies MinMaxNormalisation to an array.
     Takes minimum and maximum values from transformed audio"""
+<<<<<<< HEAD
     def __init__(self):
         pass
 
@@ -21,10 +22,16 @@ class MinMaxNormaliser(BaseEstimator, TransformerMixin):
         if step == "post":
             pass
 
+=======
+    """MinMax Normalization transforms the minimum values of the features in 0s and the maximum values into 1s"""
+    def __init__(self, min_val, max_val):
+        self.min = min_val
+        self.max = max_val
+>>>>>>> fb53b4e02316fa96919908454ee48e29ac656e28
 
     def normalise(self, array):
         normalised_audio = (array - array.min()) / (array.max() - array.min())
-        normalised_audio = normalised_audio * (self.max  - self.min) + self.min
+        normalised_audio = normalised_audio * (self.max  - self.min) - self.min
         return normalised_audio
 
 class MinMaxDenormaliser(BaseEstimator, TransformerMixin):
