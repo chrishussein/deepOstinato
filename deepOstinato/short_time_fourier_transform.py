@@ -12,5 +12,6 @@ class STFT:
         """Returns the log short-time Fourier transform version of an audio file"""
         stft = lr.stft(audio, n_fft = FRAME_SIZE-1, hop_length = HOP_SIZE)
         stft = np.abs(stft) ** 2
+        #Convert a power spectrogram (amplitude squared) to decibel (dB) units
         log_stft = lr.power_to_db(stft)
         return log_stft
