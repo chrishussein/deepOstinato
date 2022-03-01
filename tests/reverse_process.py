@@ -9,7 +9,7 @@ if __name__ == '__main__':
     input_path = "raw_data/transformed_audio/"
     output_path = 'raw_data/postproc_wav_files/'
 
-    loaded_audio = Load_Numpy.load(input_path)
+    loaded_audio = Load_Numpy.load_npy_audio(input_path)
     scaler = MinMaxDenormaliser()
     scaler.fit()
 

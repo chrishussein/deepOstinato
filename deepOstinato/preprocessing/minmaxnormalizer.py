@@ -1,9 +1,7 @@
 from sklearn.base import BaseEstimator, TransformerMixin
-<<<<<<< HEAD
 import numpy as np
-=======
->>>>>>> f2eecca45e1189b87b0b8964ca1c00f6d44b03ea
 from deepOstinato.preprocessing.constants import MAX_VAL, MIN_VAL
+from deepOstinato.preprocessing.saver import Saver
 
 class MinMaxNormaliser(BaseEstimator, TransformerMixin):
     """Applies MinMaxNormalisation to an array.
@@ -25,7 +23,7 @@ class MinMaxNormaliser(BaseEstimator, TransformerMixin):
 class MinMaxDenormaliser(BaseEstimator, TransformerMixin):
     """Retransform the array to its original scale."""
 
-    def __init__(self, min_val = -65.5473, max_val = 8.452698):
+    def __init__(self, min_val = -15.5473, max_val = 4.452698):
         self.min_val = min_val
         self.max_val = max_val
 
