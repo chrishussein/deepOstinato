@@ -10,6 +10,7 @@ class STFT:
 
     def stft(audio, n_fft = FRAME_SIZE-1, hop_length = HOP_SIZE):
         """Returns the log short-time Fourier transform version of an audio file"""
+        audio = np.array(audio)
         stft = lr.stft(audio, n_fft = FRAME_SIZE-1, hop_length = HOP_SIZE)
         stft = np.abs(stft) ** 2
         #Convert a power spectrogram (amplitude squared) to decibel (dB) units

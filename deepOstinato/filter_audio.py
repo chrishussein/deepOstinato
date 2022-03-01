@@ -6,6 +6,6 @@ def filter_audio(path, max_size=55_000_000, min_size=20_000_000):
     audio = []
     for file in os.scandir(path):
         if os.stat(file).st_size < max_size and os.stat(file).st_size > min_size:     #os.stat(file).st_size
-            file, sr = lr.load(os.path.join(path, file)) #to check
+            file, sr = lr.load(file) #to check
             audio.append(file)
     return audio
