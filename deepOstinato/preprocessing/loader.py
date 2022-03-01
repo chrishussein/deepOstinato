@@ -8,7 +8,6 @@ class Load_Numpy:
     def load(path):
         loaded_audio = []
         for filename in os.listdir(path):
-            print(filename)
-            loaded = np.load(f"{path}/{filename}")
-            print(loaded)
+            loaded = np.load(f"{path}/{filename}", allow_pickle=True)
+            loaded_audio.append(loaded)
         return loaded_audio
