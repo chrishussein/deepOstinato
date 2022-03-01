@@ -1,33 +1,11 @@
 from sklearn.base import BaseEstimator, TransformerMixin
+import numpy as np
 
 class MinMaxNormaliser(BaseEstimator, TransformerMixin):
-    """Applies MinMaxNormalisation to an array.
-    Takes minimum and maximum values from transformed audio"""
-<<<<<<< HEAD
-    def __init__(self):
-        pass
-
-    def fit(self, array, switch):
-        """Fit method for the normalizer.
-        Takes in an array and a switch (boolean) which define if the normalizer should be fitted or not"""
-        self.min_val = array.min()
-        self.max_val = array.max()
-        return self
-
-    def transform(self, array, step):
-        """Transform method that takes an array and normalize it (if step='pre'),
-        or denormalize it (if step='post'). """
-        if step == "pre":
-            pass
-        if step == "post":
-            pass
-
-=======
     """MinMax Normalization transforms the minimum values of the features in 0s and the maximum values into 1s"""
     def __init__(self, min_val, max_val):
         self.min = min_val
         self.max = max_val
->>>>>>> fb53b4e02316fa96919908454ee48e29ac656e28
 
     def normalise(self, array):
         normalised_audio = (array - array.min()) / (array.max() - array.min())
@@ -41,7 +19,8 @@ class MinMaxDenormaliser(BaseEstimator, TransformerMixin):
         self.min = min_val
         self.max = max_val
 
-    def denormalise(self, normalised_audio, original_min, original_max):
-        denormalised_audio = (normalised_audio - self.min) / (self.max - self.min)
-        denormalised_audio = normalised_audio * (original_max - original_min) + original_min
+    def denormalise(self, audio, original_min, original_max):
+        audio = np.array(audio)
+        denormalised_audio = (audio - self.min) / (self.max - self.min)
+        denormalised_audio = audio * (original_max - original_min) + original_min
         return denormalised_audio
