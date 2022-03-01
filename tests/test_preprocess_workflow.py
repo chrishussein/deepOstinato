@@ -25,6 +25,6 @@ if __name__ == '__main__':
     log_stft = STFT.stft(padded_audio, n_fft = FRAME_SIZE, hop_length = HOP_SIZE)
     scaler = MinMaxNormaliser(0, 1)
 
-    normalised_audio = scaler.normalise(log_stft)
+    normalised_audio = scaler.transform(log_stft)
     saver = Saver
     saver.save(normalised_audio)
