@@ -10,12 +10,11 @@ if __name__ == '__main__':
     output_path = 'raw_data/postproc_wav_files/'
 
     loaded_audio = Load_Numpy.load(input_path)
-    print(loaded_audio)
-    scaler = MinMaxDenormaliser(min_val=-65.5473,max_val= 14.452698 )
+    scaler = MinMaxDenormaliser()
     scaler.fit()
+
     denormalised_audio = scaler.transform(loaded_audio)
-    print(denormalised_audio)
-    print(denormalised_audio[0])
+
     inversed_audio = ISTFT.istft(denormalised_audio)
 
-    Saver.save_wav(output_path, inversed_audio, sample_rate)
+    Saver.save_wav(inversed_audio, output_path, sample_rate)

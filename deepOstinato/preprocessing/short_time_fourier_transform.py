@@ -25,7 +25,6 @@ class ISTFT:
         pass
 
     def istft(audio):
-        print(audio)
-        print(audio[0])
+
         inversed_audio = lr.istft(audio)
         return inversed_audio

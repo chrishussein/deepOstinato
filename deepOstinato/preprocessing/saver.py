@@ -15,4 +15,4 @@ class Saver(BaseEstimator, TransformerMixin):
     def save_wav(audio, path, sample_rate):
         """Method that saves audio wav files """
         for idx, inversed_audio_piece in enumerate(audio):
-            sf.write(path, f'{path}/post_processed_audio_no{idx}.wav', inversed_audio_piece, sample_rate)
+            sf.write(f'{path}post_processed_audio_no{idx}.wav', inversed_audio_piece, sample_rate)
