@@ -17,3 +17,13 @@ class STFT(BaseEstimator, TransformerMixin):
         #Convert a power spectrogram (amplitude squared) to decibel (dB) units
         log_stft = lr.power_to_db(stft)
         return log_stft
+
+class ISTFT:
+    """inverse short_time Fourier transform"""
+
+    def __init__(self):
+        pass
+
+    def istft(audio ):
+        inversed_audio = lr.istft(audio)
+        return inversed_audio
