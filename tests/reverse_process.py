@@ -1,7 +1,7 @@
-from deepOstinato.uno_reverse import Load_Numpy
-from deepOstinato.normalise import MinMaxNormaliser, MinMaxDenormaliser
-from deepOstinato.short_time_fourier_transform import ISTFT
-from deepOstinato.saver import Saver
+from deepOstinato.preprocessing.loader import Load_Numpy
+from deepOstinato.preprocessing.normalise import MinMaxNormaliser, MinMaxDenormaliser
+from deepOstinato.preprocessing.short_time_fourier_transform import ISTFT
+from deepOstinato.preprocessing.saver import Saver
 
 if __name__ == '__main__':
 
