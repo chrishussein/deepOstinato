@@ -1,5 +1,5 @@
 from sklearn.base import BaseEstimator, TransformerMixin
-from deepOstinato.constants import MAX_VAL, MIN_VAL
+from deepOstinato.preprocessing.constants import MAX_VAL, MIN_VAL
 
 class MinMaxNormaliser(BaseEstimator, TransformerMixin):
     """Applies MinMaxNormalisation to an array.
