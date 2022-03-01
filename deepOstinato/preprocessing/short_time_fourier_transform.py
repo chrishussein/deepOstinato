@@ -1,7 +1,7 @@
 import librosa as lr
 from sklearn.base import BaseEstimator, TransformerMixin
 import numpy as np
-from deepOstinato.constants import FRAME_SIZE, HOP_SIZE
+from deepOstinato.preprocessing.constants import FRAME_SIZE, HOP_SIZE
 
 class STFT(BaseEstimator, TransformerMixin):
     """short-time Fourier transform"""

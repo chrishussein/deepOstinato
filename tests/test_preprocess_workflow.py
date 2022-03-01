@@ -1,13 +1,13 @@
 from cmath import log
 from locale import normalize
-from deepOstinato.filter_audio import filter_audio
-from deepOstinato.midi_to_audio import midi_to_audio
-from deepOstinato.constants import FRAME_SIZE, HOP_SIZE
-from deepOstinato.short_time_fourier_transform import STFT
+from deepOstinato.preprocessing.filter_audio import filter_audio
+from deepOstinato.preprocessing.midi_to_audio import midi_to_audio
+from deepOstinato.preprocessing.constants import FRAME_SIZE, HOP_SIZE
+from deepOstinato.preprocessing.short_time_fourier_transform import STFT
 
-from deepOstinato.pad import Pad
-from deepOstinato.normalise import MinMaxNormaliser
-from deepOstinato.saver import Saver
+from deepOstinato.preprocessing.pad import Pad
+from deepOstinato.preprocessing.normalise import MinMaxNormaliser
+from deepOstinato.preprocessing.saver import Saver
 from sklearn.preprocessing import MinMaxScaler
 
 
