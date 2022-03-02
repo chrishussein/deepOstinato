@@ -7,7 +7,7 @@ class Saver(BaseEstimator, TransformerMixin):
     def __init__(self):
         pass
 
-    def save_npy(audio, path):
+    def save_npy(self, audio, path):
         """Method that saves preprocessed audio files """
         for idx, npy in enumerate(audio):
             np.save(os.path.join(path, f"npy_file_no{idx}"), npy)

@@ -11,6 +11,6 @@ def midi_to_audio(input_path, ouput_path):
     for file in os.listdir(input_path):
         file = file.strip('.mid')
         input_file = os.path.join(input_path, f"{file}.mid")
-        output_file = os.path.join(ouput_path, f"{file}.wav")
+        output_file = os.path.join(ouput_path, f"{file}.mp3")
         fs.midi_to_audio(input_file, output_file)
     return "Conversion completed"

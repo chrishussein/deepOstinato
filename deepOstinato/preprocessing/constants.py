@@ -1,7 +1,13 @@
 #Gather all constants in one file
-FRAME_SIZE = 2048
+#FRAME_SIZE = 2048
+FRAME_SIZE = 2048*10
+
+
+
 #FREQUENCY_BIN = FRAME_SIZE/2 +1
-HOP_SIZE = 512
+#HOP_SIZE = 512
+HOP_SIZE = 512*10
+
 #FRAME_NUMBER = (SAMPLES - FRAME_SIZE) / HOP_SIZE +1
 
 #Min Max Values for Normalisation
