@@ -1,7 +1,6 @@
 import os
 from midi2audio import FluidSynth
 
-# Change to class
 
 def midi_to_audio(input_path, ouput_path):
     """ Convert midi file to audio file.
