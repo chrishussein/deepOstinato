@@ -1,12 +1,12 @@
-In the preprocessing: 
+In the preprocessing:
     - wav files to spectrogram using librosa
     - spectograms are np.arrays one you load the audio files into librosa
-    - then we pad, apply fourier transform and normalize it using minmax scaler. 
+    - then we pad, apply fourier transform and normalize it using minmax scaler.
     - then we reconvert the spect to wav files again
 
-Model: 
+Model:
 GANs are not stable, so we need to test how changing parametres affects it.
-Architecture guidelines for stable Deep Convolutional GANs: 
+Architecture guidelines for stable Deep Convolutional GANs:
 • Replace any pooling layers with strided convolutions (discriminator) and fractional-strided
 convolutions (generator). (pooling does not add new parametres to the modek, stride does).
 • Use batchnorm in both the generator and the discriminator.
@@ -30,7 +30,7 @@ https://www.tensorflow.org/tutorials/generative/dcgan
 
     ones_like ---> "Creates a tensor of all ones that has the same shape as the input."
     https://www.tensorflow.org/api_docs/python/tf/ones_like
-    
+
 
 
 1st we should define a generator model that generates images from a random seed and a discriminator model that classifies
