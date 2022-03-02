@@ -34,6 +34,5 @@ class MinMaxDenormaliser(BaseEstimator, TransformerMixin):
 
     def transform(self, normalised_array):
         """Transform method that takes a normalized array and transforms it to its original scale """
-        normalised_array = np.array(normalised_array)
-        denormalised_array = normalised_array * (self.max_val - self.min_val) + self.max_val
+        denormalised_array = normalised_array * (self.max_val - self.min_val) + self.min_val
         return denormalised_array
