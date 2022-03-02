@@ -20,7 +20,7 @@ class STFT(BaseEstimator, TransformerMixin):
         #                              "mel": lambda x: lr.power_to_db(mel_basis.dot(x**2))}
         #return transform_type[transform](stft)
 
-        return lr.power_to_db(audio**2)
+        return lr.power_to_db(np.abs(stft)**2)
 
 
 class ISTFT:
@@ -34,7 +34,8 @@ class ISTFT:
         #transform_type = {"decibel": lambda x: (lr.db_to_amplitude(x))**(1/2),
         #                              "mel": lambda x: x}       #TO IMPLEMENT!! sqrt(reverse power to db(reverse mel_basis dot stuff))
         #spectogram = transform_type[transform](audio)
-        #inversed_audio = lr.istft(spectrogram)
-        #return inversed_audio
+        spectrogram = (lr.db_to_amplitude(audio))**(1/2)
+        inversed_audio = lr.istft(spectrogram)
+        return inversed_audio
 
-        return lr.db_to_amplitude(audio)
+        #return lr.istft(lr.db_to_amplitude(audio))
