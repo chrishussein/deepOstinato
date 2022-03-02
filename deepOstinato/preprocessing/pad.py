@@ -13,4 +13,4 @@ class Padder(BaseEstimator, TransformerMixin):
 
     def transform(self, audio):
         """Transform method to pad the audio file."""
-        return [lr.util.fix_length(piece, self.pad_size) for piece in audio]
+        return [lr.util.fix_length(piece, size = self.pad_size) for piece in audio]

@@ -34,8 +34,9 @@ class ISTFT:
         #transform_type = {"decibel": lambda x: (lr.db_to_amplitude(x))**(1/2),
         #                              "mel": lambda x: x}       #TO IMPLEMENT!! sqrt(reverse power to db(reverse mel_basis dot stuff))
         #spectogram = transform_type[transform](audio)
-        spectrogram = (lr.db_to_amplitude(audio))**(1/2)
-        inversed_audio = lr.istft(spectrogram)
+        spectrogram = lr.db_to_power(audio)
+        spectrogram = np.abs(spectrogram)**(1/2)
+        inversed_audio = lr.istft(spectrogram, n_fft = FRAME_SIZE-1, hop_length = HOP_SIZE)
         return inversed_audio
 
         #return lr.istft(lr.db_to_amplitude(audio))

@@ -6,8 +6,8 @@ HOP_SIZE = 512
 SAMPLE_RATE = 22050 #to check if constant
 
 #Min Max Values for Normalisation
-MIN_VAL = -65.5473
-MAX_VAL = 14.452698
+MIN_VAL = -62.11114
+MAX_VAL = 17.888859
 
 #Padding
 PAD_SIZE = 6000000
