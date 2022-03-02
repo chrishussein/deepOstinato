@@ -2,6 +2,7 @@ from deepOstinato.preprocessing.loader import Load_Numpy
 from deepOstinato.preprocessing.minmaxnormalizer import MinMaxNormaliser, MinMaxDenormaliser
 from deepOstinato.preprocessing.short_time_fourier_transform import ISTFT
 from deepOstinato.preprocessing.saver import Saver
+import numpy as np
 
 if __name__ == '__main__':
 
@@ -12,7 +13,7 @@ if __name__ == '__main__':
     loaded_audio = Load_Numpy.load_npy_audio(input_path)
     scaler = MinMaxDenormaliser()
     scaler.fit()
-
+    loaded_audio = np.array(loaded_audio)
     denormalised_audio = scaler.transform(loaded_audio)
 
     inversed_audio = ISTFT.istft(denormalised_audio)
