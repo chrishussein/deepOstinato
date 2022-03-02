@@ -28,7 +28,7 @@ discriminator.compile(loss='binary_crossentropy', optimizer = 'Adam')
 discriminator.trainable = False
 gan.compile(loss = 'binary_crossentropy', optimizer = 'Adam')
 
-def train_gan(gan, dataset, batch_size, codings_size, n_epochs = 'XX'):
+def train_gan(gan, dataset, batch_size, codings_size, n_epochs = 1000):
     generator, discriminator = gan.layers
     for epoch in range(n_epochs):
         for X_batch in dataset:

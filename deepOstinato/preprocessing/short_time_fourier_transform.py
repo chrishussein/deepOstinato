@@ -11,11 +11,13 @@ class STFT(BaseEstimator, TransformerMixin):
 
     def stft(audio, n_fft = FRAME_SIZE-1, hop_length = HOP_SIZE, transform="decibel"):
         """Returns the log short-time Fourier transform version of an audio file"""
-        transform_type = {"decibel": lambda x: lr.power_to_db(x**2)} #power spectrogram (amplitude squared) to decibel (dB) units
+
         audio = np.array(audio)
         stft = lr.stft(audio, n_fft = FRAME_SIZE-1, hop_length = HOP_SIZE)
-        stft = np.abs(stft) ** 2
-        #Convert to selected unit (decibel or else)
+        #Convert to selected unit (decibel, mel or else)
+        mel_basis = 0 #DEFINE THIS!!!
+        transform_type = {"decibel": lambda x: lr.power_to_db(x**2),                  #power spectrogram (amplitude squared) to decibel (dB) units
+                                      "mel": lambda x: lr.power_to_db(mel_basis.dot(x**2))}
         return transform_type[transform](stft)
 
 
