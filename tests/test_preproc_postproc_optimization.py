@@ -7,7 +7,7 @@ from locale import normalize
 from deepOstinato.preprocessing.filter_audio import filter_audio
 from deepOstinato.preprocessing.midi_to_audio import midi_to_audio
 from deepOstinato.preprocessing.constants import FRAME_SIZE, HOP_SIZE
-from deepOstinato.preprocessing.short_time_fourier_transform import STFT, ISTFT
+from deepOstinato.preprocessing.short_time_fourier_transform import STFT, ISTFT, MelSpec, Inverse_Mel
 from deepOstinato.preprocessing.pad import Padder
 from deepOstinato.preprocessing.minmaxnormalizer import MinMaxNormaliser, MinMaxDenormaliser
 from deepOstinato.preprocessing.saver import Saver
@@ -23,7 +23,7 @@ if __name__ == '__main__':
     input_audio_path = 'raw_data/sample_audio'
     npy_path = 'transformed_audio'
     output_audio_path = 'postproc_wav_files'
-    transformed_audio_path = 'raw_data/pre_post_proc'
+    transformed_audio_path = 'raw_data/pre_post_proc_mel'
 
     # Sample Rate
     sample_rate = 22050
@@ -32,11 +32,16 @@ if __name__ == '__main__':
     padder = Padder()
     saver = Saver()
     loader = Load_Numpy()
+    short_fft = STFT()
+    inv_short_fft = ISTFT()
+    mel_gram = MelSpec()
+    inv_mel_gram = Inverse_Mel()
 
     # Load, Filter, Pad, STFT the Audio
     audio = filter_audio(input_audio_path)
     padded_audio = padder.transform(audio)
-    log_stft = STFT.stft(padded_audio, n_fft = FRAME_SIZE, hop_length = HOP_SIZE)
+    #log_stft = short_fft.stft(padded_audio, n_fft = FRAME_SIZE, hop_length = HOP_SIZE)
+    mel_spec_audio = mel_gram.mel_spec(padded_audio)
 
     # Set Max Value and Optimization Increment
     n = 5
@@ -67,7 +72,7 @@ if __name__ == '__main__':
             # Process Audio and save npy files while changing min values
             scaler = MinMaxNormaliser(min_val=m, max_val=n)
             m += increment #Increase Min Val
-            normalised_audio = scaler.transform(log_stft)
+            normalised_audio = scaler.transform(mel_spec_audio)
             saver = Saver()
             print(normalised_audio)
             saver.save_npy(normalised_audio, f'{min_val_npy_output_path}/')
@@ -90,7 +95,8 @@ if __name__ == '__main__':
             scaler = MinMaxDenormaliser(min_val=m, max_val=n)
             loaded_audio = np.array(loaded_audio)
             denormalised_audio = scaler.transform(loaded_audio)
-            inversed_audio = ISTFT.istft(denormalised_audio)
+            #inversed_audio = inv_short_fft.istft(denormalised_audio)
+            inversed_audio = inv_mel_gram.imel(denormalised_audio)
             saver.save_wav(inversed_audio, f'{min_val_audio_output_path}/', sample_rate)
 
         #Increase Max Value
