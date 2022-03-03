@@ -6,9 +6,11 @@ from deepOstinato.preprocessing.saver import Saver
 class MinMaxNormaliser(BaseEstimator, TransformerMixin):
     """Applies MinMaxNormalisation to an array.
     Takes minimum and maximum values from transformed audio"""
-    def __init__(self, min_val = -5, max_val = 1):
+    def __init__(self, min_val = -2, max_val = 2, original_min = MIN_VAL, original_max = MAX_VAL):
         self.min_val = min_val
         self.max_val = max_val
+        self.original_min = original_min
+        self.original_max = original_max
 
     def fit(self):
         """Fit method for the normalizer"""
@@ -16,6 +18,7 @@ class MinMaxNormaliser(BaseEstimator, TransformerMixin):
 
     def transform(self, array):
         """Transform method that takes an array and normalize """
+        normalised_audio = (array - self.original_min) / (self.original_max - self.original_min)
         normalised_audio = (array - self.min_val) / (self.max_val - self.min_val)
         return normalised_audio
 
@@ -23,12 +26,11 @@ class MinMaxNormaliser(BaseEstimator, TransformerMixin):
 class MinMaxDenormaliser(BaseEstimator, TransformerMixin):
     """Retransform the array to its original scale."""
 
-    def __init__(self, min_val =-2, max_val=2, original_max = -60.5473, original_min=14.452698):
+    def __init__(self, min_val =-2, max_val=2, original_min = MIN_VAL, original_max = MAX_VAL):
         self.min_val = min_val
         self.max_val = max_val
-        self.original_max = original_max
         self.original_min = original_min
-
+        self.original_max = original_max
 
     def fit(self):
         """Fit method for the denormalizer"""
