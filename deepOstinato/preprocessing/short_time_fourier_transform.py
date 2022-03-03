@@ -23,7 +23,7 @@ class STFT(BaseEstimator, TransformerMixin):
         #                              "mel": lambda x: lr.power_to_db(mel_basis.dot(x**2))}
         #return transform_type[transform](stft)
 
-        return lr.power_to_db(np.abs(stft)**2)
+        return lr.power_to_db(stft**2)
 
 
 class ISTFT:

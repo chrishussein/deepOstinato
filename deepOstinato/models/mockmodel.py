@@ -1,6 +1,8 @@
 import tensorflow as tf
 from tensorflow import Sequential, layers
-
+from tensorflow.keras import Sequential, layers
+import keras
+import numpy as np
 
 def generator():
     x = 7
