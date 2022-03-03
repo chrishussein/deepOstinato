@@ -3,7 +3,6 @@ from tensorflow.keras import Sequential, layers
 import numpy as np
 
 from keras.layers import Input, Dense, Reshape, Flatten, Dropout
-#from keras.layers import BatchNormalization, Activation, ZeroPadding2D
 from keras.layers.convolutional import Conv2D
 from keras.models import Sequential, Model
 #from keras.optimizers import Adam
@@ -84,6 +83,7 @@ class GAN():
 
 
         for epoch in range(epochs):
+            pass
 
             # Select a random "real" spectrograms
 
