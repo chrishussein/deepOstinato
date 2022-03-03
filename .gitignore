@@ -4,6 +4,7 @@
 .DS_Store
 raw_data/
 notebooks/
+notebooks_backup/
 *.csv
 **/__pycache__/
 .env
