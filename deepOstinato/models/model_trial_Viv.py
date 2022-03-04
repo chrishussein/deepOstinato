@@ -81,7 +81,6 @@ class GAN():
             layers.Dense(1, activation = 'sigmoid')
         ])
 
-        #COME BACK TO UPDATE INPUTS
         return model
         #spec = Input(shape=spec_shape)
         #validity = model(spec)
