@@ -48,27 +48,23 @@ class GAN():
     def build_generator(self):
 
         model = Sequential([
-                        layers.Dense(self.spec_rows*self.spec_cols*self.channels, use_bias=False, input_shape=self.noise_shape),
+                        layers.Dense(self.spec_rows*self.spec_cols*self.channels, use_bias=False, input_shape=(None, self.noise_shape)),
                         layers.Reshape([self.spec_rows,self.spec_cols,self.channels]),
                         layers.BatchNormalization(),
                         layers.ReLU(),
 
-                        layers.Reshape((7, 7, 256)), #check input again
-                        layers.Conv2DTranspose(128, (5, 5), strides=(1, 1), padding='same', use_bias=False),
+                        layers.Conv2DTranspose(128, (5, 5), strides=(1, 1), padding='same', use_bias=False, activation = 'relu'),
+                        layers.Reshape([self.spec_rows*2,self.spec_cols*2,self.channels//2]),
                         layers.BatchNormalization(),
                         layers.ReLU(),
 
-                        layers.Conv2DTranspose(64, (5, 5), strides=(2, 2), padding='same', use_bias=False),
-                        layers.BatchNormalization(),
+                        layers.Conv2DTranspose(64, (5, 5), strides=(2, 2), padding='same', use_bias=False, activation = 'relu'),
+                        layers.Reshape([128*64,1024,1]),
                         layers.ReLU(),
 
-                        #layers.Conv2DTranspose(32, kernel_size = 3, strides =2, padding = 'same',activation = 'relu'),
-                        #layers.Conv2DTranspose(1, kernel_size = 3, strides =2, padding = 'same',activation = 'relu')
+
         ])
 
-        #noise = Input(shape=self.noise_shape)
-        #spec = model(noise)
-        #return Model(noise, spec)
         return model
 
     def build_discriminator(self):
