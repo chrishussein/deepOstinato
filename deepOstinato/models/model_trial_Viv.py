@@ -53,16 +53,14 @@ class GAN():
                         layers.BatchNormalization(),
                         layers.ReLU(),
 
-                        layers.Conv2DTranspose(128, (5, 5), strides=(1, 1), padding='same', use_bias=False, activation = 'relu'),
-                        layers.Reshape([self.spec_rows*2,self.spec_cols*2,self.channels//2]),
+                        layers.Conv2DTranspose(32, (5, 5), strides=(2, 2), padding='same', use_bias=False, activation = 'relu'),
+                        layers.Reshape([self.spec_rows,self.spec_cols*2,self.channels]),
                         layers.BatchNormalization(),
                         layers.ReLU(),
 
-                        layers.Conv2DTranspose(64, (5, 5), strides=(2, 2), padding='same', use_bias=False, activation = 'relu'),
-                        layers.Reshape([128*64,1024,1]),
+                        layers.Conv2DTranspose(16, (5, 5), strides=(2, 2), padding='same', use_bias=False, activation = 'relu'),
+                        layers.Reshape([64*16,1024,1]),
                         layers.ReLU(),
-
-
         ])
 
         return model
@@ -142,6 +140,43 @@ class GAN():
             # Train the discriminator
 
             # Train the generator
+
+cross_entropy = tf.keras.losses.BinaryCrossentropy(from_logits=True)
+
+def discriminator_loss(real_output, fake_output):
+    real_loss = cross_entropy(tf.ones_like(real_output), real_output)
+    fake_loss = cross_entropy(tf.zeros_like(fake_output), fake_output)
+    total_loss = real_loss + fake_loss
+    return total_loss
+
+def generator_loss(fake_output):
+    return cross_entropy(tf.ones_like(fake_output), fake_output)
+
+def train_gan(gan, dataset, batch_size=32, codings_size = 100, n_epochs = 500):
+    generator, discriminator = gan.layers
+    for epoch in range(n_epochs):
+        print(epoch)
+
+        """training the disciminator"""
+        noise = np.random.normal(0, 1, (batch_size, 100))
+        generated_images = generator(noise)
+        print(generated_images.shape)
+        X_fake_and_real = tf.concat([generated_images, dataset], axis = 0)
+        y1= tf.constant([[0.]]* batch_size + [[1.]] * batch_size)
+
+        """setting the target y1 to 0 fo fake images and 1 for real images"""
+        discriminator.trainable = True
+        y1 = np.array(y1)
+        discriminator.train_on_batch(X_fake_and_real, y1)
+
+        """training the generator"""
+        noise = tf.random.normal(shape = [batch_size,codings_size])
+        y2 = tf.constant([[1.]] * batch_size)
+        discriminator.trainable = False
+
+        """set to False to avoid warning by Keras"""
+        print(y1)
+        gan.train_on_batch(noise,y2)
 
 
 #if __name__ == '__main__':
