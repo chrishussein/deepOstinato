@@ -11,9 +11,13 @@ from keras.models import Sequential, Model
 
 from deepOstinato.preprocessing.constants import *
 from deepOstinato.models.model_trial_Viv import GAN, discriminator_loss, cross_entropy, train_gan
+from deepOstinato.preprocessing.loader import Load_Numpy
 
 if __name__ == '__main__':
 
+    loader = Load_Numpy()
+    path = os.join.path("..","npy_files")
+    loader.load_npy_audio(path)
     input = 0
     X_train = np.array(input)
     X_train = np.expand_dims(X_train, axis=3)
